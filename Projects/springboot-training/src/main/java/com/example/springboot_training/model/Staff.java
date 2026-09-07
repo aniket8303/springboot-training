@@ -1,8 +1,16 @@
 package com.example.springboot_training.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Staff {
 
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String name;
     private String department;
     private String role;
@@ -10,18 +18,18 @@ public class Staff {
     public Staff() {
     }
 
-    public Staff(int id, String name, String department, String role) {
+    public Staff(Integer id, String name, String department, String role) {
         this.id = id;
         this.name = name;
         this.department = department;
         this.role = role;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
