@@ -30,12 +30,12 @@ public class StaffService {
 
     // to get staff by id
     public Staff getStaffById(int id) {
-        return staffRepository.findById(id).orElse(null);
+        return staffRepository.findById(id).orElseThrow(() -> new RuntimeException("Staff Not Found"));
     }
 
     // to update staff role
     public Staff updateStaff(int id, Staff staff) {
-        Staff existingStaff = staffRepository.findById(id).orElse(null);
+        Staff existingStaff = staffRepository.findById(id).orElseThrow(() -> new RuntimeException("Staff Not Found"));
 
         if (existingStaff != null) {
             existingStaff.setName(staff.getName());
@@ -48,14 +48,9 @@ public class StaffService {
     }
 
     // to delete staff
-    public String deleteStaff(int id) {
+    public void deleteStaff(Integer id) {
 
-        if (staffRepository.existsById(id)) {
-            staffRepository.deleteById(id);
-            return "Staff deleted successfully";
-        }
-
-        return "Staff not found";
+        staffRepository.deleteById(id);
     }
 
     // to find staff by department
@@ -63,4 +58,5 @@ public class StaffService {
 
         return staffRepository.findByDepartmentIgnoreCase(department);
     }
+
 }
