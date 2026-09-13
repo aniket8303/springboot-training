@@ -80,6 +80,11 @@ public class SecurityConfig {
                                 "/api/staff/**")
                         .hasRole("MANAGER")
 
+                        // Risk API → STAFF + MANAGER
+                        .requestMatchers(
+                                "/api/risk/**")
+                        .hasAnyRole("STAFF", "MANAGER")
+
                         // Other requests
                         .anyRequest().authenticated())
 
